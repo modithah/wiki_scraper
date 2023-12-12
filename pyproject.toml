@@ -12,9 +12,48 @@ mypy = "^1.7.1"
 ruff = "^0.1.7"
 pandas = "^2.1.4"
 matplotlib = "^3.8.2"
+black = {extras = ["jupyter"], version = "^23.12.0"}
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.pylint.messages_control]
+enable = [
+    "C",
+    "E",
+    "F",
+    "I",
+    "R",
+    "W"
+]
+disable = ["C0103", # naming style
+    "C0114", # Missing module docstring
+    "C0115", # Missing class docstring
+    "C0116", # Missing function or method docstring
+    "C0301", # Line too long
+    "C0302", # Too many lines in module
+    "C1805", # Using 0 as being falsy, can make the code less readable
+    "I0011", # "Locally disabling" notification
+    "I0020", # Suppressed ...
+    "R0801", # Should find similar code, but Finds too much
+    "R0902", # Too many instance attributes
+    "R0903", # Too few public methods
+    "R0904", # Too many public methods
+    "R0911", # too-many-return-statements
+    "R0912", # too-many-branches
+    "R0913", # Too many arguments
+    "R0914", # too-many-locals
+    "R0915", # too-many-statements
+    "R0916", # Too many boolean expressions in if statement
+    "R1702", # Too many nested blocks
+    "R1705", # See R1720
+    "R1720", # (no-else-raise), or similar, as Patrick believes it poses an increased risk similar to what caused Apple's SSL/TLS security bug, "goto fail", relating to if-statements
+    "W1203", # logging-fstring-interpolation
+]
+
+[tool.pylint.REPORTS]
+reports = 'no'
+msg-template = '{line}: {msg}({msg_id})'
+output-format = 'colorized'

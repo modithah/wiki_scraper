@@ -3,7 +3,7 @@ PACKAGES = ${REPO}/*
 #wikiscraper_tests/* bin/*
 NO_LINTING = no_linting.grep
 
-all: clean ruff black test
+all: clean ruff black  #test
 
 check: ruff lint typecheck tests
 
