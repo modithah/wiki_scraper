@@ -2,7 +2,9 @@ import logging
 from datetime import datetime
 
 import requests
-from wikiscraper.scraper.data_mappings import Revision
+from wikiscraper.data_access.data_mappings import Revision
+
+DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
 BASE_REQUEST = {
     "action": "query",
@@ -52,7 +54,7 @@ def get_all_revisions(page_title: str, start_date: datetime) -> list[Revision]:
             "titles": page_title,
             "rvlimit": "500",
             "rvprop": "ids|userid|timestamp|tags",
-            "rvstart": start_date.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "rvstart": start_date.strftime(DATE_FORMAT),
         },
     )
     revisions: list[Revision] = list[Revision]()
@@ -61,13 +63,17 @@ def get_all_revisions(page_title: str, start_date: datetime) -> list[Revision]:
         for page in pages:
             for rev in page["revisions"]:
                 revisions.append(
-                    Revision(rev["revid"], rev["userid"], rev["timestamp"], rev["tags"])
+                    Revision(
+                        rev["revid"],
+                        rev["userid"],
+                        datetime.strptime(rev["timestamp"], DATE_FORMAT),
+                        rev["tags"],
+                    )
                 )
     return revisions
 
 
 def get_users_info(user_ids: list[int]):
-    logger.warning("Getting info for users")
     assert len(user_ids) <= 50, "The maximum number of users that can be queried is 50"
     params = dict(
         BASE_REQUEST,
