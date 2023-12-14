@@ -280,6 +280,16 @@ docs = ["ipython", "matplotlib", "numpydoc", "sphinx"]
 tests = ["pytest", "pytest-cov", "pytest-xdist"]
 
 [[package]]
+name = "dataclass-factory"
+version = "2.16"
+description = "An utility class for creating instances of dataclasses"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "dataclass_factory-2.16-py3-none-any.whl", hash = "sha256:9d01e73d40b8f74051df822f21d8dc8bbf2754b11670cd1c477357e8b21323ed"},
+]
+
+[[package]]
 name = "decorator"
 version = "5.1.1"
 description = "Decorators for Humans"
@@ -1187,4 +1197,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "5e133be12e5d6248dc573b63c6aeef04c16b73a354c2320ff5ff4da87b1a2729"
+content-hash = "950d03372b7b847436459809c9c7c4604a04d352ad4b09d4db7ab3cf28b4c1b2"
